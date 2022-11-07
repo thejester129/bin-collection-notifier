@@ -1,0 +1,15 @@
+{
+  "name": "bin-collection-notify-sender",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "expo-server-sdk": "^3.7.0",
+    "node-fetch": "^2.6.7"
+  },
+  "scripts": {
+    "run": "node main.js"
+  },
+  "author": "thejester129",
+  "license": "ISC"
+}
