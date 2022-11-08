@@ -6,7 +6,6 @@ exports.handler = async (event) => {
   const BASE_URL = "https://www.falkirk.gov.uk/bin-calendar";
   const CUSTOM_ID = "uprn=136065096";
 
-  var today = new Date();
   var tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   const tomorrowFormatted = today.toISOString().split("T")[0];
