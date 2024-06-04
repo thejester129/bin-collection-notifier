@@ -3,9 +3,10 @@ const { Expo } = require("expo-server-sdk");
 
 exports.handler = async (event) => {
   const EXPO_PUSH_TOKEN = process.env.EXPO_PUSH_TOKEN;
-  let expo = new Expo({
+  const expo = new Expo({
     useFcmV1: true,
   });
+
   // Check that all your push tokens appear to be valid Expo push tokens
   if (!Expo.isExpoPushToken(EXPO_PUSH_TOKEN)) {
     console.error(
@@ -13,12 +14,12 @@ exports.handler = async (event) => {
     );
     return;
   }
+
   try {
     const BASE_URL = "https://www.falkirk.gov.uk/bin-calendar";
     const CUSTOM_ID = "uprn=136065096";
 
-    var today = new Date();
-    var tomorrow = new Date();
+    const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     const tomorrowFormatted = tomorrow.toISOString().split("T")[0];
     const url = `${BASE_URL}?${CUSTOM_ID}&start=${tomorrowFormatted}&end=${tomorrowFormatted}`;
@@ -43,19 +44,15 @@ exports.handler = async (event) => {
           }
         }, "");
 
-    // Construct a message (see https://docs.expo.io/push-notifications/sending-notifications/)
-    const message = {
-      to: EXPO_PUSH_TOKEN,
-      sound: "default",
-      title: "HAW",
-      body:
-        results && results.length
-          ? `Better put out the ${binsToPutOut} for tomorrow!`
-          : "No bins to put out. Enjoy staying inside :)",
-      data: { color: "ffffff" },
-    };
-
-    if (results && results.length) {
+    if (binsToPutOut) {
+      // Construct a message (see https://docs.expo.io/push-notifications/sending-notifications/)
+      const message = {
+        to: EXPO_PUSH_TOKEN,
+        sound: "default",
+        title: "HAW",
+        body: `Better put out the ${binsToPutOut} for tomorrow!`,
+        data: { color: "ffffff" },
+      };
       console.log("Sending expo notification");
       await expo.sendPushNotificationsAsync([message]);
     }
