@@ -3,7 +3,9 @@ const { Expo } = require("expo-server-sdk");
 
 exports.handler = async (event) => {
   const EXPO_PUSH_TOKEN = process.env.EXPO_PUSH_TOKEN;
-  let expo = new Expo();
+  let expo = new Expo({
+    useFcmV1: true,
+  });
   // Check that all your push tokens appear to be valid Expo push tokens
   if (!Expo.isExpoPushToken(EXPO_PUSH_TOKEN)) {
     console.error(
@@ -63,7 +65,7 @@ exports.handler = async (event) => {
       to: EXPO_PUSH_TOKEN,
       sound: "default",
       title: "Ru-oh",
-      body:"Error fetching bin data",
+      body: "Error fetching bin data",
       data: { color: "ffffff" },
     };
 
