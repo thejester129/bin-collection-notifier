@@ -1,4 +1,4 @@
-An app that gets push notifications to remind my lazy ass to put out the bins before the day the get collected.
+An app that gets push notifications to remind me to put out the bins before the day the get collected.
 
 Front End App using Expo Go - basically just registers as a listener for push notifications from server. Doesnt need to do anything else after its been installed and opened once.
 
